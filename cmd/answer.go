@@ -17,6 +17,10 @@ package cmd
 
 import (
 	"fmt"
+	"io/ioutil"
+	"log"
+	"net/http"
+	"os"
 
 	"github.com/spf13/cobra"
 )
@@ -62,7 +66,22 @@ func answer(args []string) {
 	c := &AnswerClient{
 		AnswerClient: args[0],
 	}
-	ret = append(ret, c)
+
+	response, err := http.Get("http://localhost:8080/answer/Santiago")
+
+	if err != nil {
+		fmt.Print(err.Error())
+		os.Exit(1)
+	}
+
+	//fmt.Println(response.Body)
+
+	responseData, err := ioutil.ReadAll(response.Body)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	/*ret = append(ret, c)
 	fmt.Println(ret)
-	go play()
+	play()*/
 }
