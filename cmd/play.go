@@ -16,12 +16,9 @@ limitations under the License.
 package cmd
 
 import (
-	"encoding/json"
-	"fmt"
-	"io/ioutil"
-	"log"
 	"net/http"
-	"os"
+	"todo/config"
+	"todo/print"
 
 	"github.com/spf13/cobra"
 )
@@ -29,21 +26,11 @@ import (
 // playCmd represents the play command
 var playCmd = &cobra.Command{
 	Use:   "play",
-	Short: "A brief description of your command",
-	Long: `A longer description that spans multiple lines and likely contains examples
-and usage of using your command. For example:
-
-Cobra is a CLI library for Go that empowers applications.
-This application is a tool to generate the needed files
-to quickly create a Cobra application.`,
+	Short: "Start the Game ",
+	Long:  `Start the game , every time the command is launched , the game is reload`,
 	Run: func(cmd *cobra.Command, args []string) {
 		play()
 	},
-}
-
-type Question struct {
-	Country string
-	Capital []string
 }
 
 func init() {
@@ -53,35 +40,7 @@ func init() {
 
 func play() {
 
-	response, err := http.Get("http://localhost:8080/questions")
-
-	if err != nil {
-		fmt.Print(err.Error())
-		os.Exit(1)
-	}
-
-	//fmt.Println(response.Body)
-
-	responseData, err := ioutil.ReadAll(response.Body)
-	if err != nil {
-		log.Fatal(err)
-	}
-	// fmt.Println(string(responseData))
-	var question []Question
-	json.Unmarshal([]byte(responseData), &question)
-	fmt.Println("what is the Capital of", question[0].Country)
-	for _, c := range question[0].Capital {
-		fmt.Print(c, " ")
-	}
-	fmt.Println()
-
-	/*for _, s := range question {
-		fmt.Println("what is the Capital of ", s.Country)
-		for _, c := range s.Capital {
-			fmt.Print(c, " ")
-		}
-		fmt.Println()
-
-	}*/
+	response, err := http.Get(config.C.Conf.QuestionsUrl)
+	print.HandleResponse(response, err)
 
 }

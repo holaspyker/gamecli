@@ -1,0 +1,3 @@
+conf:
+  questionsUrl: /questions
+  answerUrl: /answer

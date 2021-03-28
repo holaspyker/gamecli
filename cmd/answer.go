@@ -16,11 +16,10 @@ limitations under the License.
 package cmd
 
 import (
-	"fmt"
-	"io/ioutil"
-	"log"
+	"game/config"
+	"game/print"
 	"net/http"
-	"os"
+	"net/url"
 
 	"github.com/spf13/cobra"
 )
@@ -28,8 +27,6 @@ import (
 type AnswerClient struct {
 	AnswerClient string
 }
-
-var AnswerSlice []AnswerClient
 
 // answerCmd represents the answer command
 var answerCmd = &cobra.Command{
@@ -50,38 +47,14 @@ to quickly create a Cobra application.`,
 func init() {
 	rootCmd.AddCommand(answerCmd)
 
-	// Here you will define your flags and configuration settings.
-
-	// Cobra supports Persistent Flags which will work for this command
-	// and all subcommands, e.g.:
-	// answerCmd.PersistentFlags().String("foo", "", "A help for foo")
-
-	// Cobra supports local flags which will only run when this command
-	// is called directly, e.g.:
-	// answerCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
 }
 
 func answer(args []string) {
-	ret := make([]*AnswerClient, 0)
-	c := &AnswerClient{
-		AnswerClient: args[0],
-	}
 
-	response, err := http.Get("http://localhost:8080/answer/Santiago")
+	response, err := http.PostForm(config.C.Conf.AnswerUrl, url.Values{
+		"capital": {args[0]},
+	})
 
-	if err != nil {
-		fmt.Print(err.Error())
-		os.Exit(1)
-	}
+	print.HandleResponse(response, err)
 
-	//fmt.Println(response.Body)
-
-	responseData, err := ioutil.ReadAll(response.Body)
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	/*ret = append(ret, c)
-	fmt.Println(ret)
-	play()*/
 }
