@@ -1,3 +1,3 @@
 conf:
-  questionsUrl: /questions
-  answerUrl: /answer
+  questionsUrl: http://localhost:8080/questions
+  answerUrl: http://localhost:8080/answer

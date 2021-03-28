@@ -15,7 +15,7 @@ limitations under the License.
 */
 package main
 
-import "todo/cmd"
+import "game/cmd"
 
 func main() {
 	cmd.Execute()

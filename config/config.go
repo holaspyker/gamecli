@@ -39,7 +39,6 @@ func readConf(filename string) (*Conf, error) {
 	if err != nil {
 		return nil, fmt.Errorf("in file %q: %v", filename, err)
 	}
-	fmt.Printf("%#v", c.Conf.File)
 
 	return c, nil
 }

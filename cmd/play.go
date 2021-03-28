@@ -16,9 +16,9 @@ limitations under the License.
 package cmd
 
 import (
+	"game/config"
+	"game/print"
 	"net/http"
-	"todo/config"
-	"todo/print"
 
 	"github.com/spf13/cobra"
 )
