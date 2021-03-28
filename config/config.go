@@ -12,6 +12,7 @@ type Conf struct {
 	Conf struct {
 		QuestionsUrl string `yaml:"questionsUrl"`
 		AnswerUrl    string `yaml:"answerUrl"`
+		Question     string `yaml:"question"`
 	}
 }
 

@@ -24,17 +24,13 @@ import (
 	"github.com/spf13/cobra"
 )
 
-type AnswerClient struct {
-	AnswerClient string
-}
-
 // answerCmd represents the answer command
 var answerCmd = &cobra.Command{
 	Use:   "answer",
 	Short: "Send your answer for the game",
-	Long: `Send your answer for the game 
-	example: game answer 2
-	 ,
+	Long: `Send your answer for the game. For example:
+
+      Game answer 2.`,
 	Run: func(cmd *cobra.Command, args []string) {
 		answer(args)
 
