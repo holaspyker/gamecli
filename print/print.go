@@ -48,9 +48,9 @@ func showQuestion(q Question) {
 // showing the result of the Game
 func ShowResult(r Classification) {
 	fmt.Println("Result:")
-	fmt.Printf("you have %d answer(s) correct .\n", r.Correct)
+	fmt.Printf("You have %d answer(s) correct .\n", r.Correct)
 	for _, c := range r.Result {
-		fmt.Printf(" The capital of %s is %s , your answer was %s, and this is %t.\n", c.Country, c.Capital, c.Answer, c.OK)
+		fmt.Printf(" The capital of %s is %s , your answer was %s,and that's %t.\n", c.Country, c.Capital, c.Answer, c.OK)
 	}
 	fmt.Printf("You were better than %d%% of all quizzers.\n", r.Position)
 }
